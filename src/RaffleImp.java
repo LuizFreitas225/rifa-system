@@ -1,5 +1,6 @@
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.ArrayList;
 import java.util.List;
 
 public class RaffleImp extends UnicastRemoteObject implements Raffle {
@@ -10,21 +11,27 @@ public class RaffleImp extends UnicastRemoteObject implements Raffle {
     }
 
     @Override
-    public Boolean chooseNumber(String clientName ,Integer number) throws RemoteException {
-        if(numbers.length > number){
+    public String chooseNumber(String clientName ,Integer number) throws RemoteException {
+        if(number  <= 0  || numbers.length > number){
             //invalid number
-            return false;
+            return "Número inválido, o numero deve ser mair que 0 e menor que " + numbers.length + "."  ;
         }
         else if(numbers[number - 1] == null ){
             numbers[number -1]  = clientName;
-            return true;
+            return "Número  " +number+  " escolhido.";
         }
-        return false;
+        return "O número " +number+ " já foi escolhido anteriormente por alguem, tente outro numero.";
     }
 
     @Override
     public List<Integer> getAvailableNumbers() throws RemoteException {
+        List<Integer> availableNumbers = new ArrayList<>();
 
-        return null;
+        for ( int index = 0; index < numbers.length; index++){
+            if ( numbers[index] == null || numbers[index].isEmpty()){
+                availableNumbers.add(index + 1);
+            }
+        }
+        return availableNumbers;
     }
 }
