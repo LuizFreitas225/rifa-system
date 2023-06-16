@@ -44,7 +44,7 @@ public class Client {
 
                 System.out.println("1 - Listar números diponiveís");
                 System.out.println("2 - Escolher um número");
-                System.out.println("3 - Escolher um número");
+                System.out.println("3 - Sair");
 
                 System.out.println("Escolha uma das ações:");
                 int action = scan.nextInt();
