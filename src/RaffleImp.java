@@ -2,6 +2,7 @@ import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class RaffleImp extends UnicastRemoteObject implements Raffle {
     String[] numbers ;
@@ -18,7 +19,22 @@ public class RaffleImp extends UnicastRemoteObject implements Raffle {
         }
         else if(numbers[number - 1] == null ){
             numbers[number -1]  = clientName;
-            return "Número  " +number+  " escolhido.";
+
+            Boolean hasEmptyPosition = false;
+            for (String item : numbers) {
+                if(item == null){
+                  hasEmptyPosition = true ;
+                  break;
+                }
+            }
+            if(hasEmptyPosition){
+                return "Número  " +number+  " escolhido.";
+            }else{
+                Random sortition = new Random();
+                Integer winner = sortition.nextInt(numbers.length);
+                return "Todos os números foram preenchidos, o ganhador foi o nosso cliente com o  número "
+                 + (winner+ 1) + ": " + numbers[winner];
+            }
         }
         return "O número " +number+ " já foi escolhido anteriormente por alguem, tente outro numero.";
     }
