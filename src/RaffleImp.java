@@ -12,9 +12,9 @@ public class RaffleImp extends UnicastRemoteObject implements Raffle {
 
     @Override
     public String chooseNumber(String clientName ,Integer number) throws RemoteException {
-        if(number  <= 0  || numbers.length > number){
+        if(number  <= 0  || numbers.length < number){
             //invalid number
-            return "Número inválido, o numero deve ser mair que 0 e menor que " + numbers.length + "."  ;
+            return "Número inválido, o numero deve ser mair que 0 e menor que " + (numbers.length + 1) + "."  ;
         }
         else if(numbers[number - 1] == null ){
             numbers[number -1]  = clientName;

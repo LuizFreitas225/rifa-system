@@ -32,8 +32,7 @@ public class Client {
                         System.out.println("Informe o número que deseja escolher:");
                         Integer number = scan.nextInt();
                         System.out.println(raffle.chooseNumber(clientName, number));
-                        break;
-                 
+                        break;  
                 }
             }
         
