@@ -24,6 +24,7 @@ public class Client {
             //Socket
             Socket socket = new Socket("localhost", 8080); // IP e porta do servidor
 
+
             // Thread para receber mensagens do servidor
             Thread receberThread = new Thread(() -> {
                 try {
@@ -43,13 +44,19 @@ public class Client {
 
                 System.out.println("1 - Listar números diponiveís");
                 System.out.println("2 - Escolher um número");
+                System.out.println("3 - Escolher um número");
 
                 System.out.println("Escolha uma das ações:");
                 int action = scan.nextInt();
 
                 switch (action) {
                     case 1:
-                    System.out.println(raffle.getAvailableNumbers().toString());
+                    if(raffle.getAvailableNumbers().isEmpty()){
+                       System.out.println("Todos as posições foram vendidas e a rifa encerrada.");
+                    }else{
+                        System.out.println(raffle.getAvailableNumbers().toString());
+                    }
+                   
                         break;
                     case 2:
                         System.out.println("Informe o número que deseja escolher:");
@@ -66,7 +73,12 @@ public class Client {
                             System.out.println(returnMessage);
                         }
                         
-                        break;  
+                        break; 
+
+                        case 3:
+                            System.out.println("Saindo...");
+                            stop = true;
+                        break;
                 }
             }
            receberThread.join(); 

@@ -19,19 +19,21 @@ public class Server {
 
             registry.rebind("Raffle", raffle);
 
-           
 
             //Socket
             ServerSocket serverSocket = new ServerSocket(8080); // Porta do servidor
             System.out.println("Server pronto.");
+
             
             //Recebendo clientes e criando thread pra todos
             List<Socket> clients = new ArrayList<Socket>();
+
 
             while(true){
               Socket clientSocket = serverSocket.accept();
               clients.add(clientSocket);
               System.out.println("Novo Cliente conectado: " + clientSocket.getInetAddress().getHostAddress());
+
 
                 // Cria uma nova thread para receber mensagens do cliente cliente
                 Thread clienteThread = new Thread(() -> {
@@ -61,7 +63,7 @@ public class Server {
         }
     }
 
-     // Envia uma mensagem para todos os clientes, exceto o cliente atual
+     // Envia uma mensagem para todos os clientes
     private static void sendMessageToAll(List<Socket> clients, String mensagem, ServerSocket serverSocket) throws IOException {
       for (Socket clients2 : clients) {
        
