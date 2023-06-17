@@ -58,8 +58,8 @@ public class Server {
 
             
         } catch (Exception e) {
-            System.err.println(e.toString());
-            e.printStackTrace();
+            // System.err.println(e.toString());
+            // e.printStackTrace();
         }
     }
 
